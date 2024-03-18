@@ -48,3 +48,11 @@ function createBoard() {
 };
 
 createBoard();
+
+const allSquares = document.querySelectorAll("#gameboard .square");
+
+allSquares.forEach(square => {
+    square.addEventListener('dragstart', dragstart);
+    square.addEventListener('dragover', dragover);
+    square.addEventListener('drop', dragdrop);
+})
