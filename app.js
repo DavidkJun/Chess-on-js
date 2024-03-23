@@ -101,3 +101,10 @@ function dragdrop(e) {
         }
     }
 }
+
+function checkIfValid(target) {
+    const targetId = Number(target.getAttribute('square-id')) || Number(target.parentNode.getAttribute('square-id'));
+    const startId = Number(startPositionId);
+    const piece = draggedElement.id
+    console.log(startId, targetId, piece);
+}
