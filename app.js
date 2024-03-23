@@ -64,3 +64,7 @@ function dragstart(e){
     startPositionId = e.target.parentNode.getAttribute("square-id");
     draggedElement = e.target;
 }
+
+function dragover(e){
+    e.preventDefault();
+}
