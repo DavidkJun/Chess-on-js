@@ -56,3 +56,6 @@ allSquares.forEach(square => {
     square.addEventListener('dragover', dragover);
     square.addEventListener('drop', dragdrop);
 })
+
+let startPositionId;
+let draggedElement;
