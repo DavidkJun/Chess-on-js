@@ -68,3 +68,36 @@ function dragstart(e){
 function dragover(e){
     e.preventDefault();
 }
+
+function dragdrop(e) {
+    e.stopPropagation();
+
+    const correctTurn = draggedElement.firstChild.classList.contains(playerTurn);
+    const taken = e.target.classList.contains('piece');
+    const valid = checkIfValid(e.target);
+    const opponentTurn = playerTurn === 'white' ? 'black' : 'white';
+    const takenByOpponent = e.target.firstChild?.classList.contains(opponentTurn);
+
+    if (correctTurn) {
+        if (takenByOpponent && valid) {
+            e.target.parentNode.append(draggedElement);
+            e.target.remove();
+            checkForWin();
+            changePlayer();
+            return
+        }
+        if (taken && !takenByOpponent) {
+            err.textContent = 'Can not go there'
+            setTimeout(() => {
+                err.textContent = ''
+            }, 2000);
+            return
+        }
+        if (valid) {
+            e.target.append(draggedElement);
+            checkForWin();
+            changePlayer();
+            return
+        }
+    }
+}
