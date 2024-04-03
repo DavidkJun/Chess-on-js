@@ -63,3 +63,8 @@ path {
     position: relative;
     z-index: 10;
 }
+
+.black {
+    fill: rgb(40, 40, 40);
+}
+
