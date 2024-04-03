@@ -54,3 +54,8 @@ p{
     z-index: -9;
 }
 
+path {
+    position: relative;
+    z-index: -10;
+}
+
