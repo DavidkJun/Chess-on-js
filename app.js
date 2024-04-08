@@ -299,4 +299,14 @@ function checkIfValid(target) {
             break;
     }
 }
-
+function changePlayer(){
+    if(playerTurn === 'black'){
+        reverseIds()
+        playerTurn = 'white'
+        playerDetails.textContent = 'white'
+    } else {
+        revertIds()
+        playerTurn = 'black'
+        playerDetails.textContent = 'black'
+    }
+}
