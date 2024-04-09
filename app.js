@@ -310,3 +310,17 @@ function changePlayer(){
         playerDetails.textContent = 'black'
     }
 }
+
+function reverseIds() {
+    const allSquares = document.querySelectorAll('#gameboard .square');
+    allSquares.forEach((square, i) => {
+        square.setAttribute('square-id', (width * width - 1) - i)
+    })
+}
+
+function revertIds() {
+    const allSquares = document.querySelectorAll('#gameboard .square');
+    allSquares.forEach((square, i) => {
+        square.setAttribute('square-id', i)
+    })
+}
