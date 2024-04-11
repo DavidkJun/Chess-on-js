@@ -20,33 +20,28 @@ const startPieces = [
 ]
 
 function createBoard() {
+    const colors = ["light-brown", "dark-brown"];
     startPieces.forEach((startPiece, i) => {
         const square = document.createElement("div");
         square.classList.add("square");
-        square.innerHTML = startPiece
-
+        square.innerHTML = startPiece;
         square.setAttribute("square-id", i);
-        square.firstChild?.setAttribute('draggable', true)
+        square.firstChild?.setAttribute('draggable', true);
 
-        const row = Math.floor((FULL_FIELD - i) / FIELD_SIZE) + 1;
 
-        if (row % 2 === 0) {
-            square.classList.add(i % 2 === 0 ? "light-brown" : "dark-brown");
-        } else {
-            square.classList.add(i % 2 === 0 ? "dark-brown" : "light-brown");
+        const colorIndex = (i + Math.floor((FULL_FIELD - i) / FIELD_SIZE) + 1) % 2;
+        square.classList.add(colors[colorIndex]);
+
+
+        if (i <= 15 || i >= 48) {
+            const colorClass = i <= 15 ? "black" : "white";
+            square.firstChild.firstChild.classList.add(colorClass);
         }
-
-        if (i <= 15) {
-            square.firstChild.firstChild.classList.add("black");
-        }
-        if (i >= 48) {
-            square.firstChild.firstChild.classList.add("white");
-        }
-
 
         gameBoard.append(square);
     });
 };
+
 
 createBoard();
 
