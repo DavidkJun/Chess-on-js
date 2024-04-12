@@ -7,7 +7,7 @@ const FULL_FIELD = 63;
 
 let playerTurn = 'black';
 playerDetails.textContent = 'black'
-//записати фігури юнікодом, пусті клітинки пробілом
+
 const startPieces = [
     Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook,
     Pawn, Pawn, Pawn, Pawn, Pawn, Pawn, Pawn, Pawn,
@@ -227,9 +227,11 @@ function changePlayer(){
 // замінити forEach на for of
 function reverseIds() {
     const allSquares = document.querySelectorAll('#gameboard .square');
-    allSquares.forEach((square, i) => {
-        square.setAttribute('square-id', (FIELD_SIZE * FIELD_SIZE - 1) - i)
-    })
+    let index = 0;
+    for (const square of allSquares) {
+        square.setAttribute('square-id', (FIELD_SIZE * FIELD_SIZE - 1) - index);
+        index++;
+    }
 }
 // покращити назви змінних
 function revertIds() {
