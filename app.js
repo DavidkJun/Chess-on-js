@@ -236,9 +236,11 @@ function reverseIds() {
 // покращити назви змінних
 function revertIds() {
     const allSquares = document.querySelectorAll('#gameboard .square');
-    allSquares.forEach((square, i) => {
-        square.setAttribute('square-id', i)
-    })
+    let index = 0;
+    for (const square of allSquares) {
+        square.setAttribute('square-id', index);
+        index++;
+    }
 }
 // об'єднати блоки, та порівнювати параметри white через тру та false
 function checkForWin() {
