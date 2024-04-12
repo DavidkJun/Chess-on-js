@@ -56,12 +56,12 @@ allSquares.forEach(square => {
 let startPositionId;
 let draggedElement;
 
-function dragstart(e){
+function dragstart(e) {
     startPositionId = e.target.parentNode.getAttribute("square-id");
     draggedElement = e.target;
 }
 
-function dragover(e){
+function dragover(e) {
     e.preventDefault();
 }
 
@@ -71,7 +71,6 @@ function dragdrop(e) {
     const correctTurn = draggedElement.firstChild.classList.contains(playerTurn);
     const taken = e.target.classList.contains('piece');
     const valid = checkIfValid(e.target);
-    //зробити булеан змінну, і на основі її зміни міняти колір
     const opponentTurn = playerTurn === 'white' ? 'black' : 'white';
     const takenByOpponent = e.target.firstChild?.classList.contains(opponentTurn);
 
@@ -115,30 +114,30 @@ function checkIfValid(target) {
     const isStraightLeftClear = [];
 
     for (let i = 1; i <= 7; i++) {
-        isRightCrossForwardClear[i] = isRightCrossForwardClear[i-1] !== false && !document.querySelector(`[square-id="${startId + FIELD_SIZE * i + i}"]`)?.firstChild;
-        isLeftCrossForwardClear[i] = isLeftCrossForwardClear[i-1] !== false && !document.querySelector(`[square-id="${startId + FIELD_SIZE * i - i}"]`)?.firstChild;
-        isRightCrossBackwardClear[i] = isRightCrossBackwardClear[i-1] !== false && !document.querySelector(`[square-id="${startId - FIELD_SIZE * i - i}"]`)?.firstChild;
-        isLeftCrossBackwardClear[i] = isLeftCrossBackwardClear[i-1] !== false && !document.querySelector(`[square-id="${startId - FIELD_SIZE * i + i}"]`)?.firstChild;
-        isStraightForwardClear[i] = isStraightForwardClear[i-1] !== false && !document.querySelector(`[square-id="${startId + FIELD_SIZE * i}"]`)?.firstChild;
-        isStraightBackwardClear[i] = isStraightBackwardClear[i-1] !== false && !document.querySelector(`[square-id="${startId - FIELD_SIZE * i}"]`)?.firstChild;
-        isStraightRightClear[i] = isStraightRightClear[i-1] !== false && !document.querySelector(`[square-id="${startId + i}"]`)?.firstChild;
-        isStraightLeftClear[i] = isStraightLeftClear[i-1] !== false && !document.querySelector(`[square-id="${startId - i}"]`)?.firstChild;
+        isRightCrossForwardClear[i] = isRightCrossForwardClear[i - 1] !== false && !document.querySelector(`[square-id="${startId + FIELD_SIZE * i + i}"]`)?.firstChild;
+        isLeftCrossForwardClear[i] = isLeftCrossForwardClear[i - 1] !== false && !document.querySelector(`[square-id="${startId + FIELD_SIZE * i - i}"]`)?.firstChild;
+        isRightCrossBackwardClear[i] = isRightCrossBackwardClear[i - 1] !== false && !document.querySelector(`[square-id="${startId - FIELD_SIZE * i - i}"]`)?.firstChild;
+        isLeftCrossBackwardClear[i] = isLeftCrossBackwardClear[i - 1] !== false && !document.querySelector(`[square-id="${startId - FIELD_SIZE * i + i}"]`)?.firstChild;
+        isStraightForwardClear[i] = isStraightForwardClear[i - 1] !== false && !document.querySelector(`[square-id="${startId + FIELD_SIZE * i}"]`)?.firstChild;
+        isStraightBackwardClear[i] = isStraightBackwardClear[i - 1] !== false && !document.querySelector(`[square-id="${startId - FIELD_SIZE * i}"]`)?.firstChild;
+        isStraightRightClear[i] = isStraightRightClear[i - 1] !== false && !document.querySelector(`[square-id="${startId + i}"]`)?.firstChild;
+        isStraightLeftClear[i] = isStraightLeftClear[i - 1] !== false && !document.querySelector(`[square-id="${startId - i}"]`)?.firstChild;
     }
 
     switch (piece) {
         case 'pawn':
 
-            const starterRow = [8,9,10,11,12,13,14,15];
-            if(starterRow.includes(startId) && startId + FIELD_SIZE * 2 === targetId && isStraightForwardClear[2] ||
+            const starterRow = [8, 9, 10, 11, 12, 13, 14, 15];
+            if (starterRow.includes(startId) && startId + FIELD_SIZE * 2 === targetId && isStraightForwardClear[2] ||
                 startId + FIELD_SIZE === targetId ||
                 startId + FIELD_SIZE - 1 === targetId && document.querySelector(`[square-id="${startId + FIELD_SIZE - 1}"]`).firstChild ||
-                startId + FIELD_SIZE + 1 === targetId && document.querySelector(`[square-id="${startId + FIELD_SIZE + 1}"]`).firstChild){
+                startId + FIELD_SIZE + 1 === targetId && document.querySelector(`[square-id="${startId + FIELD_SIZE + 1}"]`).firstChild) {
                 return true;
             }
             break;
         case 'knight':
 
-            if(
+            if (
                 startId + FIELD_SIZE * 2 + 1 === targetId ||
                 startId + FIELD_SIZE * 2 - 1 === targetId ||
                 startId + FIELD_SIZE - 2 === targetId ||
@@ -147,7 +146,7 @@ function checkIfValid(target) {
                 startId - FIELD_SIZE * 2 - 1 === targetId ||
                 startId - FIELD_SIZE + 2 === targetId ||
                 startId - FIELD_SIZE - 2 === targetId
-            ){
+            ) {
                 return true;
             }
             break;
@@ -186,7 +185,7 @@ function checkIfValid(target) {
             for (let i = 1; i <= 7; i++) {
                 if (
                     (targetId === startId + FIELD_SIZE * i && isStraightForwardClear[i]) ||
-                     (targetId === startId - FIELD_SIZE * i && isStraightBackwardClear[i]) ||
+                    (targetId === startId - FIELD_SIZE * i && isStraightBackwardClear[i]) ||
                     (targetId === startId + i && isStraightRightClear[i]) ||
                     (targetId === startId - i && isStraightLeftClear[i])
                 ) {
@@ -212,19 +211,14 @@ function checkIfValid(target) {
             break;
     }
 }
+
 // зробити через інверсію змінної, та брати змінну з масиву
-function changePlayer(){
-    if(playerTurn === 'black'){
-        reverseIds()
-        playerTurn = 'white'
-        playerDetails.textContent = 'white'
-    } else {
-        revertIds()
-        playerTurn = 'black'
-        playerDetails.textContent = 'black'
-    }
+function changePlayer() {
+    playerTurn = playerTurn === 'black' ? 'white' : 'black';
+    playerDetails.textContent = playerTurn;
+    playerTurn === 'white' ? reverseIds() : revertIds();
 }
-// замінити forEach на for of
+
 function reverseIds() {
     const allSquares = document.querySelectorAll('#gameboard .square');
     let index = 0;
@@ -233,6 +227,7 @@ function reverseIds() {
         index++;
     }
 }
+
 // покращити назви змінних
 function revertIds() {
     const allSquares = document.querySelectorAll('#gameboard .square');
@@ -242,7 +237,7 @@ function revertIds() {
         index++;
     }
 }
-// об'єднати блоки, та порівнювати параметри white через тру та false
+
 function checkForWin() {
     const kings = Array.from(document.querySelectorAll('#king'));
     let blackWins = !kings.some(king => king.firstChild.classList.contains('white'));
