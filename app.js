@@ -2,7 +2,7 @@ const gameBoard = document.querySelector("#gameboard");
 const playerDetails = document.querySelector("#player");
 const infoDisplay = document.querySelector("#info-display");
 const err = document.querySelector("#err");
-const FIELD_SIZE = 8 // FIELD_SIZE
+const FIELD_SIZE = 8
 const FULL_FIELD = 63;
 
 let playerTurn = 'black';
@@ -212,7 +212,6 @@ function checkIfValid(target) {
     }
 }
 
-// зробити через інверсію змінної, та брати змінну з масиву
 function changePlayer() {
     playerTurn = playerTurn === 'black' ? 'white' : 'black';
     playerDetails.textContent = playerTurn;
