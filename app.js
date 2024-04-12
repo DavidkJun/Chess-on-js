@@ -245,15 +245,14 @@ function revertIds() {
 // об'єднати блоки, та порівнювати параметри white через тру та false
 function checkForWin() {
     const kings = Array.from(document.querySelectorAll('#king'));
+    let blackWins = !kings.some(king => king.firstChild.classList.contains('white'));
+    let whiteWins = !kings.some(king => king.firstChild.classList.contains('black'));
 
-    if (!kings.some(king => king.firstChild.classList.contains('white'))) {
-        infoDisplay.innerHTML = "Black Player Wins!";
+    if (blackWins || whiteWins) {
+        infoDisplay.innerHTML = `${blackWins ? "Black" : "White"} Player Wins!`;
         const allSquares = document.querySelectorAll('.square');
-        allSquares.forEach(square => square.firstChild?.setAttribute('draggable', false));
-    }
-    if (!kings.some(king => king.firstChild.classList.contains('black'))) {
-        infoDisplay.innerHTML = "White Player Wins!";
-        const allSquares = document.querySelectorAll('.square');
-        allSquares.forEach(square => square.firstChild?.setAttribute('draggable', false));
+        for (const square of allSquares) {
+            square.firstChild?.setAttribute('draggable', false);
+        }
     }
 }
