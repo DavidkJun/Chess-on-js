@@ -2,8 +2,12 @@ const gameBoard = document.querySelector("#gameboard");
 const playerDetails = document.querySelector("#player");
 const infoDisplay = document.querySelector("#info-display");
 const err = document.querySelector("#err");
+
 const FIELD_SIZE = 8
 const FULL_FIELD = 63;
+const timeDellay = 2000;
+const blackStartPeices = 15;
+const whiteStartPeices = 48;
 
 let playerTurn = 'black';
 playerDetails.textContent = 'black'
@@ -21,25 +25,23 @@ const startPieces = [
 
 function createBoard() {
     const colors = ["light-brown", "dark-brown"];
-    startPieces.forEach((startPiece, i) => {
+    for (const [i, startPiece] of startPieces.entries()) {
         const square = document.createElement("div");
         square.classList.add("square");
         square.innerHTML = startPiece;
         square.setAttribute("square-id", i);
         square.firstChild?.setAttribute('draggable', true);
 
-
         const colorIndex = (i + Math.floor((FULL_FIELD - i) / FIELD_SIZE) + 1) % 2;
         square.classList.add(colors[colorIndex]);
 
-
-        if (i <= 15 || i >= 48) {
-            const colorClass = i <= 15 ? "black" : "white";
+        if (i <= blackStartPeices || i >= whiteStartPeices) {
+            const colorClass = i <= blackStartPeices ? "black" : "white";
             square.firstChild.firstChild.classList.add(colorClass);
         }
 
         gameBoard.append(square);
-    });
+    }
 };
 
 
@@ -80,20 +82,20 @@ function dragdrop(e) {
             e.target.remove();
             checkForWin();
             changePlayer();
-            return
+            return;
         }
         if (taken && !takenByOpponent) {
             err.textContent = 'Can not go there'
             setTimeout(() => {
                 err.textContent = ''
-            }, 2000);
-            return
+            }, timeDellay);
+            return;
         }
         if (valid) {
             e.target.append(draggedElement);
             checkForWin();
             changePlayer();
-            return
+            return;
         }
     }
 }
@@ -227,7 +229,7 @@ function reverseIds() {
     }
 }
 
-// покращити назви змінних
+
 function revertIds() {
     const allSquares = document.querySelectorAll('#gameboard .square');
     let index = 0;
