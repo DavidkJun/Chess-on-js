@@ -234,6 +234,8 @@ function checkIfValid(target) {
         moves['isStraightLeftClear'][i] = moves['isStraightLeftClear'][i - 1] !== false && !document.querySelector(`[square-id="${startId - i}"]`)?.firstChild;
     }
 
+    return checkPieceFunctions[piece](targetId,startId, moves);
+
 }
 
 function changePlayer() {
