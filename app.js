@@ -100,6 +100,17 @@ function dragdrop(e) {
     }
 }
 
+function checkPawn(targetId, startId,moves) {
+    const starterRow = [8, 9, 10, 11, 12, 13, 14, 15];
+    if (starterRow.includes(startId) && startId + FIELD_SIZE * 2 === targetId && moves['isStraightForwardClear'][2] ||
+        startId + FIELD_SIZE === targetId ||
+        startId + FIELD_SIZE - 1 === targetId && document.querySelector(`[square-id="${startId + FIELD_SIZE - 1}"]`).firstChild ||
+        startId + FIELD_SIZE + 1 === targetId && document.querySelector(`[square-id="${startId + FIELD_SIZE + 1}"]`).firstChild) {
+        return true;
+    }
+    return false;
+}
+
 
 function checkIfValid(target) {
     const targetId = Number(target.getAttribute('square-id')) || Number(target.parentNode.getAttribute('square-id'));
@@ -127,16 +138,7 @@ function checkIfValid(target) {
     }
 
     switch (piece) {
-        case 'pawn':
 
-            const starterRow = [8, 9, 10, 11, 12, 13, 14, 15];
-            if (starterRow.includes(startId) && startId + FIELD_SIZE * 2 === targetId && isStraightForwardClear[2] ||
-                startId + FIELD_SIZE === targetId ||
-                startId + FIELD_SIZE - 1 === targetId && document.querySelector(`[square-id="${startId + FIELD_SIZE - 1}"]`).firstChild ||
-                startId + FIELD_SIZE + 1 === targetId && document.querySelector(`[square-id="${startId + FIELD_SIZE + 1}"]`).firstChild) {
-                return true;
-            }
-            break;
         case 'knight':
 
             if (
