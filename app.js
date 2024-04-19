@@ -189,6 +189,15 @@ function checkKing(startId, targetId) {
     }
     return false;
 }
+
+const checkPieceFunctions = {
+    'pawn': checkPawn,
+    'knight': checkKnight,
+    'bishop': checkBishop,
+    'queen': checkQueen,
+    'rook': checkRook,
+    'king': checkKing
+}
 function checkIfValid(target) {
     const targetId = Number(target.getAttribute('square-id')) || Number(target.parentNode.getAttribute('square-id'));
     const startId = Number(startPositionId);
