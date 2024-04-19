@@ -111,6 +111,7 @@ function checkPawn(targetId, startId,moves) {
     return false;
 }
 
+
 function checkKnight(targetId, startId){
     if (
         startId + FIELD_SIZE * 2 + 1 === targetId ||
@@ -123,6 +124,20 @@ function checkKnight(targetId, startId){
         startId - FIELD_SIZE - 2 === targetId
     ) {
         return true;
+    }
+    return false;
+}
+
+function checkBishop(targetId, startId, moves){
+    for (let i = 1; i <= 7; i++) {
+        if (
+            (targetId === startId + FIELD_SIZE * i + i && moves['isRightCrossForwardClear'][i]) ||
+            (targetId === startId + FIELD_SIZE * i - i && moves['isLeftCrossForwardClear'][i]) ||
+            (targetId === startId - FIELD_SIZE * i - i && moves['isRightCrossBackwardClear'][i]) ||
+            (targetId === startId - FIELD_SIZE * i + i && moves['isLeftCrossBackwardClear'][i])
+        ) {
+            return true;
+        }
     }
     return false;
 }
@@ -153,19 +168,6 @@ function checkIfValid(target) {
 
     switch (piece) {
 
-        case 'bishop':
-
-            for (let i = 1; i <= 7; i++) {
-                if (
-                    (targetId === startId + FIELD_SIZE * i + i && isRightCrossForwardClear[i]) ||
-                    (targetId === startId + FIELD_SIZE * i - i && isLeftCrossForwardClear[i]) ||
-                    (targetId === startId - FIELD_SIZE * i - i && isRightCrossBackwardClear[i]) ||
-                    (targetId === startId - FIELD_SIZE * i + i && isLeftCrossBackwardClear[i])
-                ) {
-                    return true;
-                }
-            }
-            break;
         case 'queen':
 
             for (let i = 1; i <= 7; i++) {
