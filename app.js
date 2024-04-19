@@ -212,15 +212,26 @@ function checkIfValid(target) {
     const isStraightRightClear = [];
     const isStraightLeftClear = [];
 
+    const moves = {
+        'isRightCrossForwardClear' : [],
+        'isLeftCrossForwardClear' : [],
+        'isRightCrossBackwardClear' : [],
+        'isLeftCrossBackwardClear' : [],
+        'isStraightForwardClear' : [],
+        'isStraightBackwardClear' : [],
+        'isStraightRightClear' : [],
+        'isStraightLeftClear' : []
+    }
+
     for (let i = 1; i <= 7; i++) {
-        isRightCrossForwardClear[i] = isRightCrossForwardClear[i - 1] !== false && !document.querySelector(`[square-id="${startId + FIELD_SIZE * i + i}"]`)?.firstChild;
-        isLeftCrossForwardClear[i] = isLeftCrossForwardClear[i - 1] !== false && !document.querySelector(`[square-id="${startId + FIELD_SIZE * i - i}"]`)?.firstChild;
-        isRightCrossBackwardClear[i] = isRightCrossBackwardClear[i - 1] !== false && !document.querySelector(`[square-id="${startId - FIELD_SIZE * i - i}"]`)?.firstChild;
-        isLeftCrossBackwardClear[i] = isLeftCrossBackwardClear[i - 1] !== false && !document.querySelector(`[square-id="${startId - FIELD_SIZE * i + i}"]`)?.firstChild;
-        isStraightForwardClear[i] = isStraightForwardClear[i - 1] !== false && !document.querySelector(`[square-id="${startId + FIELD_SIZE * i}"]`)?.firstChild;
-        isStraightBackwardClear[i] = isStraightBackwardClear[i - 1] !== false && !document.querySelector(`[square-id="${startId - FIELD_SIZE * i}"]`)?.firstChild;
-        isStraightRightClear[i] = isStraightRightClear[i - 1] !== false && !document.querySelector(`[square-id="${startId + i}"]`)?.firstChild;
-        isStraightLeftClear[i] = isStraightLeftClear[i - 1] !== false && !document.querySelector(`[square-id="${startId - i}"]`)?.firstChild;
+        moves['isRightCrossForwardClear'][i] = moves['isRightCrossForwardClear'][i - 1] !== false && !document.querySelector(`[square-id="${startId + FIELD_SIZE * i + i}"]`)?.firstChild;
+        moves['isLeftCrossForwardClear'][i] = moves['isLeftCrossForwardClear'][i - 1] !== false && !document.querySelector(`[square-id="${startId + FIELD_SIZE * i - i}"]`)?.firstChild;
+        moves['isRightCrossBackwardClear'][i] = moves['isRightCrossBackwardClear'][i - 1] !== false && !document.querySelector(`[square-id="${startId - FIELD_SIZE * i - i}"]`)?.firstChild;
+        moves['isLeftCrossBackwardClear'][i] = moves['isLeftCrossBackwardClear'][i - 1] !== false && !document.querySelector(`[square-id="${startId - FIELD_SIZE * i + i}"]`)?.firstChild;
+        moves['isStraightForwardClear'][i] = moves['isStraightForwardClear'][i - 1] !== false && !document.querySelector(`[square-id="${startId + FIELD_SIZE * i}"]`)?.firstChild;
+        moves['isStraightBackwardClear'][i] = moves['isStraightBackwardClear'][i - 1] !== false && !document.querySelector(`[square-id="${startId - FIELD_SIZE * i}"]`)?.firstChild;
+        moves['isStraightRightClear'][i] = moves['isStraightRightClear'][i - 1] !== false && !document.querySelector(`[square-id="${startId + i}"]`)?.firstChild;
+        moves['isStraightLeftClear'][i] = moves['isStraightLeftClear'][i - 1] !== false && !document.querySelector(`[square-id="${startId - i}"]`)?.firstChild;
     }
 
 }
