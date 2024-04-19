@@ -111,7 +111,21 @@ function checkPawn(targetId, startId,moves) {
     return false;
 }
 
-
+function checkKnight(targetId, startId){
+    if (
+        startId + FIELD_SIZE * 2 + 1 === targetId ||
+        startId + FIELD_SIZE * 2 - 1 === targetId ||
+        startId + FIELD_SIZE - 2 === targetId ||
+        startId + FIELD_SIZE + 2 === targetId ||
+        startId - FIELD_SIZE * 2 + 1 === targetId ||
+        startId - FIELD_SIZE * 2 - 1 === targetId ||
+        startId - FIELD_SIZE + 2 === targetId ||
+        startId - FIELD_SIZE - 2 === targetId
+    ) {
+        return true;
+    }
+    return false;
+}
 function checkIfValid(target) {
     const targetId = Number(target.getAttribute('square-id')) || Number(target.parentNode.getAttribute('square-id'));
     const startId = Number(startPositionId);
@@ -139,21 +153,6 @@ function checkIfValid(target) {
 
     switch (piece) {
 
-        case 'knight':
-
-            if (
-                startId + FIELD_SIZE * 2 + 1 === targetId ||
-                startId + FIELD_SIZE * 2 - 1 === targetId ||
-                startId + FIELD_SIZE - 2 === targetId ||
-                startId + FIELD_SIZE + 2 === targetId ||
-                startId - FIELD_SIZE * 2 + 1 === targetId ||
-                startId - FIELD_SIZE * 2 - 1 === targetId ||
-                startId - FIELD_SIZE + 2 === targetId ||
-                startId - FIELD_SIZE - 2 === targetId
-            ) {
-                return true;
-            }
-            break;
         case 'bishop':
 
             for (let i = 1; i <= 7; i++) {
