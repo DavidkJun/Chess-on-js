@@ -141,6 +141,24 @@ function checkBishop(targetId, startId, moves){
     }
     return false;
 }
+
+function checkQueen(targetId, startId, moves) {
+    for (let i = 1; i <= 7; i++) {
+        if (
+            (targetId === startId + FIELD_SIZE * i + i && moves['isRightCrossForwardClear'][i]) ||
+            (targetId === startId + FIELD_SIZE * i - i && moves['isLeftCrossForwardClear'][i]) ||
+            (targetId === startId - FIELD_SIZE * i - i && moves['isRightCrossBackwardClear'][i]) ||
+            (targetId === startId - FIELD_SIZE * i + i && moves['isLeftCrossBackwardClear'][i]) ||
+            (targetId === startId + FIELD_SIZE * i && moves['isStraightForwardClear'][i]) ||
+            (targetId === startId - FIELD_SIZE * i && moves['isStraightBackwardClear'][i]) ||
+            (targetId === startId + i && moves['isStraightRightClear'][i]) ||
+            (targetId === startId - i && moves['isStraightLeftClear'][i])
+        ) {
+            return true;
+        }
+    }
+    return false;
+}
 function checkIfValid(target) {
     const targetId = Number(target.getAttribute('square-id')) || Number(target.parentNode.getAttribute('square-id'));
     const startId = Number(startPositionId);
@@ -168,23 +186,6 @@ function checkIfValid(target) {
 
     switch (piece) {
 
-        case 'queen':
-
-            for (let i = 1; i <= 7; i++) {
-                if (
-                    (targetId === startId + FIELD_SIZE * i + i && isRightCrossForwardClear[i]) ||
-                    (targetId === startId + FIELD_SIZE * i - i && isLeftCrossForwardClear[i]) ||
-                    (targetId === startId - FIELD_SIZE * i - i && isRightCrossBackwardClear[i]) ||
-                    (targetId === startId - FIELD_SIZE * i + i && isLeftCrossBackwardClear[i]) ||
-                    (targetId === startId + FIELD_SIZE * i && isStraightForwardClear[i]) ||
-                    (targetId === startId - FIELD_SIZE * i && isStraightBackwardClear[i]) ||
-                    (targetId === startId + i && isStraightRightClear[i]) ||
-                    (targetId === startId - i && isStraightLeftClear[i])
-                ) {
-                    return true;
-                }
-            }
-            break;
         case 'rook':
 
             for (let i = 1; i <= 7; i++) {
