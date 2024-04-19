@@ -173,6 +173,22 @@ function checkRook(targetId, startId, moves) {
     }
     return false;
 }
+
+function checkKing(startId, targetId) {
+    if (
+        startId + 1 === targetId ||
+        startId - 1 === targetId ||
+        startId + FIELD_SIZE === targetId ||
+        startId + FIELD_SIZE + 1 === targetId ||
+        startId + FIELD_SIZE - 1 === targetId ||
+        startId - FIELD_SIZE === targetId ||
+        startId - FIELD_SIZE + 1 === targetId ||
+        startId - FIELD_SIZE - 1 === targetId
+    ) {
+        return true;
+    }
+    return false;
+}
 function checkIfValid(target) {
     const targetId = Number(target.getAttribute('square-id')) || Number(target.parentNode.getAttribute('square-id'));
     const startId = Number(startPositionId);
@@ -198,25 +214,6 @@ function checkIfValid(target) {
         isStraightLeftClear[i] = isStraightLeftClear[i - 1] !== false && !document.querySelector(`[square-id="${startId - i}"]`)?.firstChild;
     }
 
-    switch (piece) {
-
-        case 'king':
-            if (
-                startId + 1 === targetId ||
-                startId - 1 === targetId ||
-                startId + FIELD_SIZE === targetId ||
-                startId + FIELD_SIZE + 1 === targetId ||
-                startId + FIELD_SIZE - 1 === targetId ||
-                startId - FIELD_SIZE === targetId ||
-                startId - FIELD_SIZE + 1 === targetId ||
-                startId - FIELD_SIZE - 1 === targetId
-            ) {
-                return true;
-            }
-            break;
-        default:
-            break;
-    }
 }
 
 function changePlayer() {
